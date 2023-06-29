@@ -1,29 +1,31 @@
 {
-  "name": "server",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./bin/www",
+  "name": "business-cards-app",
+  "version": "1.2.0",
+  "description": "Business card app for businesses",
+  "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node .",
-    "dev": "cross-env NODE_ENV=development nodemon .",
-    "amit": "node console"
+    "start": "node .",
+    "dev": "nodemon ."
   },
+  "keywords": [
+    "Business card",
+    "businesses app"
+  ],
+  "author": "David Yakin",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.1",
-    "config": "^3.3.9",
-    "cookie-parser": "~1.4.4",
+    "config": "^3.3.6",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "joi": "^17.9.2",
-    "jsonwebtoken": "^9.0.0",
+    "express": "^4.17.2",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "mongoose": "^7.1.1",
-    "morgan": "~1.9.1"
+    "mongoose": "^6.1.4",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.15"
   }
 }

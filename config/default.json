@@ -1,3 +1,3 @@
 {
-  "validatorOption": "Joi"
+  "jwtKey": "YourPrivateKeyVer3"
 }
