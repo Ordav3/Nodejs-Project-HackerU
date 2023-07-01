@@ -12,7 +12,10 @@ const User = require("./userModel");
 const auth = require("../../middlewares/authorization");
 const chalk = require("chalk");
 
-router.post("/register", async (req, res) => {
+//--1-
+router.post("", async (req, res) => {
+  console.log(chalk.blue("Route: User Registration"));
+
   const { error } = validateRegistration(req.body);
   if (error) {
     console.log(chalk.redBright(error.details[0].message));
@@ -25,16 +28,16 @@ router.post("/register", async (req, res) => {
     return res.status(400).send("User already registered.");
   }
   user = new User({ ...req.body });
-  // user = new User(
-  //   _.pick(req.body, ["name", "email", "password", "biz", "cards"])
-  // );
 
   user.password = generateHashPassword(user.password);
   await user.save();
   res.send(_.pick(user, ["_id", "name", "email"]));
 });
 
+//--2--
 router.post("/login", async (req, res) => {
+  console.log(chalk.blue("Route: User Login"));
+
   const { error } = validateSignin(req.body);
   if (error) {
     console.log(chalk.redBright(error.details[0].message));
@@ -58,7 +61,10 @@ router.post("/login", async (req, res) => {
   });
 });
 
-router.get("/getAllUsers", auth, async (req, res) => {
+//--3--
+router.get("", auth, async (req, res) => {
+  console.log(chalk.blue("Route: Get All Users (Admin only)"));
+
   try {
     console.log(req.user);
     if (!req.user || !req.user.isAdmin) {
@@ -71,16 +77,21 @@ router.get("/getAllUsers", auth, async (req, res) => {
   }
 });
 
-router.get("/userInfo", auth, (req, res) => {
-  let user = req.user;
+//--4--
+router.get("/:id", auth, (req, res) => {
+  console.log(chalk.blue("Route: Get User by ID"));
 
+  let user = req.user;
   User.findById(user._id)
     .select(["-password", "-createdAt", "-__v"])
     .then((user) => res.send(user))
     .catch((errorsFromMongoose) => res.status(500).send(errorsFromMongoose));
 });
 
-router.put("/userInfo", auth, async (req, res) => {
+//--5--
+router.put("/:id", auth, async (req, res) => {
+  console.log(chalk.blue("Route: Update User by ID"));
+
   try {
     const { error } = validateEditUser(req.body);
     if (error) {
@@ -94,7 +105,10 @@ router.put("/userInfo", auth, async (req, res) => {
   }
 });
 
-router.put("/userInfo/:id", auth, async (req, res) => {
+//--6--
+router.patch("/:id", auth, async (req, res) => {
+  console.log(chalk.blue("Route: Partially Update User by ID"));
+
   try {
     const { error } = validateEditUser(req.body);
     if (error) {
@@ -111,7 +125,10 @@ router.put("/userInfo/:id", auth, async (req, res) => {
   }
 });
 
-router.delete("/deleteUser/:id", auth, async (req, res) => {
+//--7--
+router.delete("/:id", auth, async (req, res) => {
+  console.log(chalk.blue("Route: Delete User by ID"));
+
   try {
     console.log(req.user);
     if (!req.user || !req.user.isAdmin) {
