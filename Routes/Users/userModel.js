@@ -50,14 +50,14 @@ const userSchema = new mongoose.Schema({
     },
     alt: { type: String, maxlength: 256 },
   },
-  state: {
-    type: String,
-    maxlength: 256,
-    validate: {
-      validator: minAllowEmpty(2),
-      message: "should be empty or minimum",
-    },
-  },
+  // state: {
+  //   type: String,
+  //   maxlength: 256,
+  //   validate: {
+  //     validator: minAllowEmpty(2),
+  //     message: "should be empty or minimum",
+  //   },
+  // },
   address: {
     state: {
       type: String,

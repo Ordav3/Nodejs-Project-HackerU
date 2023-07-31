@@ -1,0 +1,7 @@
+{
+    "dbConfig": {
+        "url": "mongodb+srv://developer:1VJjXDCcM6Ov9koP@cluster0.f7oaqvm.mongodb.net/Cards_Project_db"  
+    },
+    "jwt": "1QWE@#jksd%$flk3r8u23A$QIOO!90as",
+    "file": "production"
+}

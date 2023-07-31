@@ -1,5 +1,6 @@
 const validateRegistration = require("./usersValidations/registraion");
 const validateEditUser = require("./usersValidations/editUser");
+const validateEditIsBusiness = require("./usersValidations/ediIisBusiness");
 const validateSignin = require("./usersValidations/signIn");
 const {
   comparePassword,
@@ -12,20 +13,22 @@ const User = require("./userModel");
 const auth = require("../../middlewares/authorization");
 const chalk = require("chalk");
 
-//--1-
-router.post("", async (req, res) => {
-  console.log(chalk.blue("Route: User Registration"));
+const getUser = async (user_id)=>{
+   let user = await User.findById(user_id);
+   return user;
+};
 
+
+router.post("", async (req, res) => {
   const { error } = validateRegistration(req.body);
   if (error) {
-    console.log(chalk.redBright(error.details[0].message));
     return res.status(400).send(error.details[0].message);
   }
 
   let user = await User.findOne({ email: req.body.email });
   if (user) {
-    console.log(chalk.redBright("Registration Error: User already registered"));
-    return res.status(400).send("User already registered.");
+
+    return res.status(409).send("User already exists.");
   }
   user = new User({ ...req.body });
 
@@ -34,26 +37,22 @@ router.post("", async (req, res) => {
   res.send(_.pick(user, ["_id", "name", "email"]));
 });
 
-//--2--
-router.post("/login", async (req, res) => {
-  console.log(chalk.blue("Route: User Login"));
 
-  const { error } = validateSignin(req.body);
+router.post("/login", async (req, res) => {
+const { error } = validateSignin(req.body);
   if (error) {
-    console.log(chalk.redBright(error.details[0].message));
     return res.status(400).send(error.details[0].message);
   }
 
   let user = await User.findOne({ email: req.body.email });
+  
   if (!user) {
-    console.log(chalk.redBright("Invalid email"));
-    return res.status(400).send("Invalid email or password.");
+    return res.status(401).send("Invalid email or password.");
   }
 
   const validPassword = comparePassword(req.body.password, user.password);
   if (!validPassword) {
-    console.log(chalk.redBright("Invalid password"));
-    return res.status(400).send("Invalid email or password.");
+    return res.status(401).send("Invalid email or password.");
   }
 
   res.json({
@@ -61,12 +60,9 @@ router.post("/login", async (req, res) => {
   });
 });
 
-//--3--
-router.get("", auth, async (req, res) => {
-  console.log(chalk.blue("Route: Get All Users (Admin only)"));
 
-  try {
-    console.log(req.user);
+router.get("", auth, async (req, res) => {
+ try {
     if (!req.user || !req.user.isAdmin) {
       throw "you need to be admin!";
     }
@@ -77,25 +73,37 @@ router.get("", auth, async (req, res) => {
   }
 });
 
-//--4--
-router.get("/:id", auth, (req, res) => {
-  console.log(chalk.blue("Route: Get User by ID"));
 
+router.get("/:id", auth, (req, res) => {
   let user = req.user;
+  if(!(user._id.toString() == req.params.id || user.isAdmin)){
+     res.status(404).send("Authorization Error");
+    return;
+  }
+
   User.findById(user._id)
     .select(["-password", "-createdAt", "-__v"])
-    .then((user) => res.send(user))
+    .then(
+      (user) => {
+      if(user){
+        res.send(user);
+      }else{
+        res.status(404).send('User not found');
+      }
+    })
     .catch((errorsFromMongoose) => res.status(500).send(errorsFromMongoose));
 });
 
-//--5--
 router.put("/:id", auth, async (req, res) => {
-  console.log(chalk.blue("Route: Update User by ID"));
-
+ 
+  let user = req.user;
+  if(user._id.toString() != req.params.id ){
+      res.status(404).send("Authorization Error");
+    return;
+ }
   try {
     const { error } = validateEditUser(req.body);
     if (error) {
-      console.log(chalk.redBright(error.details[0].message));
       return res.status(400).send(error.details[0].message);
     }
     await User.findByIdAndUpdate(req.user._id, req.body);
@@ -105,18 +113,18 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
-//--6--
 router.patch("/:id", auth, async (req, res) => {
-  console.log(chalk.blue("Route: Partially Update User by ID"));
+  
+  let user = req.user;
+  if(user._id.toString() != req.params.id ){
+      res.status(404).send("Authorization Error");
+    return;
+ }
 
   try {
-    const { error } = validateEditUser(req.body);
+    const { error } = validateEditIsBusiness(req.body);
     if (error) {
-      console.log(chalk.redBright(error.details[0].message));
       return res.status(400).send(error.details[0].message);
-    }
-    if (!req.user || !req.user.isAdmin) {
-      throw "you need to be admin!";
     }
     await User.findByIdAndUpdate(req.params.id, req.body);
     res.json({ msg: "Done" });
@@ -125,16 +133,26 @@ router.patch("/:id", auth, async (req, res) => {
   }
 });
 
-//--7--
 router.delete("/:id", auth, async (req, res) => {
-  console.log(chalk.blue("Route: Delete User by ID"));
-
   try {
-    console.log(req.user);
-    if (!req.user || !req.user.isAdmin) {
-      throw "you need to be admin!";
+    let user = await getUser(req.user._id);
+    if(!user){
+      res.status(404).send("Authorization Error"); //TODO replace the error msg
+      return;
     }
-    await User.findByIdAndDelete(req.params.id);
+
+    if(user._id.toString() != req.params.id ){
+      if (!user.isAdmin) {
+        res.status(404).send("Authorization Error");
+        return;
+      }
+   }
+   
+    let delted_user = await User.findByIdAndDelete(req.params.id);
+    if(!delted_user){
+      res.status(404).send("User not found");
+       return;
+    }
     res.json({ msg: "Done" });
   } catch (err) {
     res.status(500).send(err);

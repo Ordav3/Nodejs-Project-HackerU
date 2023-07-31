@@ -1,0 +1,7 @@
+{
+    "dbConfig": {
+        "url": "mongodb://127.0.0.1:27017/card_project_dev"
+    },
+    "jwt": "iGs61pU9T09mvC!8J8L$N3*T42Z0L$wX",
+    "file": "development"
+}
