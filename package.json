@@ -11,7 +11,7 @@
     "Business card",
     "businesses app"
   ],
-  "author": "David Yakin",
+  "author": "Or David",
   "license": "ISC",
   "dependencies": {
     "cross-env": "^7.0.3",
