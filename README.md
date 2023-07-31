@@ -21,11 +21,6 @@ Start the express server:
 npm start
 
 
-
-### Environment Variables
-
-Ensure to setup your environment variables in a `.env` file in the root directory as shown in the `.env.example` file.
-
 ## Features
 
 1. *User Registration & Login*: New users can be created, and registered users can login.
@@ -62,6 +57,10 @@ Here are the available API endpoints:
 - *PATCH /cards/:id*: Like/unlike a specific card.
 - *DELETE /cards/:id*: Delete a specific card.
 
+To further help with the usage of this API, we have included Postman collections that you can import and use for testing.
+
+- [Cards API Postman Collection](./Cards apis.postman_collection.json)
+- [Users API Postman Collection](./User APIs Collection.postman_collection.json)
 
 ### Usage
 
