@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "8edc77fc-8c97-4448-8b82-25b886ff9d5a",
+		"name": "Cards apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "869614"
+	},
+	"item": [
+		{
+			"name": "Get ALL cards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/cards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new card",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTI3NTYzNX0.vm6UaOVPHChc0dYSbw0Iwg9BHBawyHPe_rHX8fkVBRQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \"title\": \"dfhfgjhgkhgkj\",\r\n  \"subtitle\": \"dxhfgjghkhgk\",\r\n  \"description\": \"dsgfdhfgjgfj\",\r\n  \"phone\": \"0340342356\",\r\n  \"email\":\"Vincent3@gmail.com\" ,\r\n  \"web\":\"wrstdyfugjhk\",\r\n  \"image\": {\r\n    \"url\": \"adsfdgfhgjhkl\",\r\n    \"alt\": \"asrdtfyugiho\"\r\n    },\r\n   \"address\": {\r\n    \"state\": \"dfhgh\",\r\n    \"country\":\"dfghxdfh\",\r\n    \"city\": \"sdghdfh\",\r\n    \"street\": \"wegtrdfh\",\r\n    \"houseNumber\": \"44\",\r\n    \"zip\": \"2125345\"\r\n   }\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/cards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get my-cards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTI3NTYzNX0.vm6UaOVPHChc0dYSbw0Iwg9BHBawyHPe_rHX8fkVBRQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8181/cards/my-cards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards",
+						"my-cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get card by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/cards/64b05783a3054f9cb6cbbbd4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards",
+						"64b05783a3054f9cb6cbbbd4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit card",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTI3NTYzNX0.vm6UaOVPHChc0dYSbw0Iwg9BHBawyHPe_rHX8fkVBRQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \"title\": \"c0000021\",\r\n  \"subtitle\": \"dxhfg0jghkhgk\",\r\n  \"description\": \"dsgf0dhfgjgfj\",\r\n  \"phone\": \"0300042356\",\r\n  \"email\":\"Vincent3@gmail.com\" ,\r\n  \"web\":\"wrst000fugjhk\",\r\n  \"image\": {\r\n    \"url\": \"adsfdg1f0gjhkl\",\r\n    \"alt\": \"asrdtfy10giho\"\r\n    },\r\n   \"address\": {\r\n    \"state\": \"df01hgh\",\r\n    \"country\":\"df10ghxdfh\",\r\n    \"city\": \"sd0h1dfh\",\r\n    \"street\": \"we0gtr1dfh\",\r\n    \"houseNumber\": \"4014\",\r\n    \"zip\": \"21205345\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/cards/64b26ca7a5cf603038df9dc9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards",
+						"64b26ca7a5cf603038df9dc9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like a card",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTI3NTYzNX0.vm6UaOVPHChc0dYSbw0Iwg9BHBawyHPe_rHX8fkVBRQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8181/cards/64b26ca7a5cf603038df9dc9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards",
+						"64b26ca7a5cf603038df9dc9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete cade",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTI3NTYzNX0.vm6UaOVPHChc0dYSbw0Iwg9BHBawyHPe_rHX8fkVBRQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8181/cards/64b26ca7a5cf603038df9dc9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"cards",
+						"64b26ca7a5cf603038df9dc9"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

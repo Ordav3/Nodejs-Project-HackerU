@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "8e8a7655-f292-4c68-8a28-78d56a7328bf",
+		"name": "User APIs Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "869614"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": {\"first\": \"Eran\", \"middle\": \"Koko\", \"last\": \"Tzabar\"},\r\n  \"isBusiness\": true,\r\n  \"phone\": \"0987654321\",\r\n  \"email\": \"Vincent2@gmail.com\",\r\n  \"password\": \"$2a$10$OZeJKxQm2GePZSlXYESQ5ebdHbZd9tdkts431BSc.AfLwte39MlwO\",\r\n  \"address\":{\r\n\"state\":\"France\", \r\n  \"country\": \"France\",\r\n  \"city\": \"Paris\",\r\n  \"street\": \"Haogen\",\r\n  \"houseNumber\": \"6\"},\r\n \"image\": {\"url\": \"\", \"alt\": \"\"}\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"Vincent3@gmail.com\",\r\n    \"password\": \"Ab123456!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MjA1NTk2fQ.dyb7GlMwt7uAAfx26UEcUuWXfjpVdBnhvM9h1BvPjbc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8181/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReceiveUserByID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGExYzkzOThjMzRhOWViMmE2ZjM1YjAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MzI0NzE3fQ.30KxBwfhyX5Jv0XP3dvFBuEWomU80PVvz8a_z7PmldQ",
+						"type": "text",
+						"equals": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8181/users/64a00781eae3b231a61eb371",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						"64a00781eae3b231a61eb371"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditUser",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGExYzkzOThjMzRhOWViMmE2ZjM1YjAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MzI0NzE3fQ.30KxBwfhyX5Jv0XP3dvFBuEWomU80PVvz8a_z7PmldQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": {\"first\": \"toko5\", \"middle\": \"Kbbbo\", \"last\": \"Tzasafsdr\"},\r\n  \"isBusiness\": true,\r\n  \"phone\": \"0487654321\",\r\n  \"email\": \"Vincent5@gmail.com\",\r\n  \"password\": \"Ab123456!\",\r\n  \"address\":{\r\n\"state\":\"France\", \r\n  \"country\": \"eeance\",\r\n  \"city\": \"Paris\",\r\n  \"street\": \"Haogen\",\r\n  \"houseNumber\": \"7\"},\r\n \"image\": {\"url\": \"\", \"alt\": \"\"}\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/users/64a1c9398c34a9eb2a6f35b0?x-auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZmQ3OGU1MWJjZTVhZjUxYWM5NDciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MjA2OTAyfQ.GdxTCagBoZL0CMePttZX_obXJPdMd0zpHsciPFLG1es",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						"64a1c9398c34a9eb2a6f35b0"
+					],
+					"query": [
+						{
+							"key": "x-auth-token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZmQ3OGU1MWJjZTVhZjUxYWM5NDciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MjA2OTAyfQ.GdxTCagBoZL0CMePttZX_obXJPdMd0zpHsciPFLG1es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change_isBusiness_status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGExYzkzOThjMzRhOWViMmE2ZjM1YjAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MzI0NzE3fQ.30KxBwfhyX5Jv0XP3dvFBuEWomU80PVvz8a_z7PmldQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isBusiness\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/users/64a1c9398c34a9eb2a6f35b0?x-auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZmQ3OGU1MWJjZTVhZjUxYWM5NDciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MjA2OTAyfQ.GdxTCagBoZL0CMePttZX_obXJPdMd0zpHsciPFLG1es",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						"64a1c9398c34a9eb2a6f35b0"
+					],
+					"query": [
+						{
+							"key": "x-auth-token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZmQ3OGU1MWJjZTVhZjUxYWM5NDciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg4MjA2OTAyfQ.GdxTCagBoZL0CMePttZX_obXJPdMd0zpHsciPFLG1es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlmZjkwN2U1MWJjZTVhZjUxYWM5NDAiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODg3NDE3MDB9.QrgFNptiuLMSfNXpS8ExBj80qHqHD9FRtYjbQ2auzcY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8181/users/64a827129477e4e22e9a453b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"users",
+						"64a827129477e4e22e9a453b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
